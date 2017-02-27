@@ -1,12 +1,12 @@
-#show-listItem {
+#show-listItem, #errorPrompt {
   display: none;
 }
 
-.listItem {
+.listItem, .inputNotes {
   cursor: pointer;
   color: #0088cc;
 }
 
-.listItem:hover {
+.listItem:hover, .inputNotes:hover {
   text-decoration: underline;
 }

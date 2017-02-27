@@ -4,33 +4,41 @@ function ListItem(taskName, taskNotes) {
   this.taskNotes = taskNotes;
 }
 
+var listItemList = [];
 // Front end logic
 $(function() {
   $("form#inputForm").submit(function(event){
     event.preventDefault();
-
     var inputtedTaskName = $("input#inputItem").val();
     var inputtedTaskNotes = $("input#inputNotes").val();
+    if (!inputtedTaskName || !inputtedTaskNotes) {
+      $("#errorPrompt").show();
+    } else {
+      var newListItem = new ListItem(inputtedTaskName, inputtedTaskNotes);
+      listItemList.push(newListItem);
+      refreshList();
+      $("input#inputItem").val("");
+      $("input#inputNotes").val("");
+    }
 
-    var newListItem = new ListItem(inputtedTaskName, inputtedTaskNotes);
-
-    $("ul#listItems").append("<li><span class='listItem'>" + newListItem.taskName + "</span></li>");
-
-    $("input#inputItem").val("");
-    $("input#inputNotes").val("");
-
-    $(".listItem").last().click(function() {
-      $(".foo").removeClass("foo");
-      $(this).addClass("foo");
-
-      $("#show-listItem").show();
-      $("#show-listItem h2").text(newListItem.taskName);
-      $(".inputItem").text(newListItem.taskName);
-      $(".inputNotes").text(newListItem.taskNotes);
-    });
+    function refreshList() {
+      $("li.listItem").remove();
+      listItemList.forEach(function(listItem) {
+        $("ul#listItems").append("<li class='listItem' id='" + listItemList.indexOf(listItem) + "'>" + listItem.taskName + "</li>");
+        $(".listItem").last().click(function() {
+          $("#show-listItem").show();
+          $("#show-listItem h2").text(listItem.taskName);
+          $(".inputItem").text(listItem.taskName);
+          $(".inputNotes").text(listItem.taskNotes);
+        });
+      });
+    }
 
     $(".inputNotes").click(function() {
-      $(".foo").remove();
+      debugger;
+      listItemList.splice(listItemList.indexOf(this));
+      $("#show-listItem").hide();
+      refreshList();
     });
   });
 });
