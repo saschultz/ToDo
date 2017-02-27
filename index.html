@@ -11,14 +11,23 @@
     <div class="container">
       <form id="inputForm">
         <div class="form-group">
-          <label for="userInput">Enter something and I'll echo it back to you.</label>
-          <input type="text" id="userInput" class="form-control">
-          <p id="errorFeedback">You must enter something.</p>
+          <label for="inputItem">Enter an item for your to-do list.</label>
+          <input type="text" id="inputItem" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="inputNotes">Enter notes for your to-do list item.</label>
+          <input type="text" id="inputNotes" class="form-control">
         </div>
         <button type="submit" name="button" class="btn">Submit</button>
       </form>
       <div class="response">
-        <p><span id="echoInput"></span></p>
+        <ul id="listItems"></ul>
+        <div id="show-listItem">
+          <h2></h2>
+          <p>Item: <span class="inputItem"></span></p>
+          <p>notes: <span class="inputNotes"></span></p>
+          <!-- <button type="submit" name="button" class="btn">Remove Item from List</button> -->
+        </div>
       </div>
     </div>
   </body>
